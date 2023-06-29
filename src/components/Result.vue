@@ -1,5 +1,5 @@
 <template>
-  <div class="crt-result">
+  <div class="crt-result cr-elevated">
     <h2 class="crt-result__name">{{ props.name }}</h2>
     <p class="crt-result__description">
       {{
@@ -14,7 +14,6 @@
 </template>
 <style>
 .crt-result {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: white;
   padding: 1rem;
   display: flex;
@@ -25,11 +24,16 @@
 .crt-result__name {
   font-size: 1.5rem;
   margin: 0;
+  font-weight: 600;
 }
 
 .crt-result__price {
   font-size: 1.5rem;
   margin: 0;
+}
+
+.crt-result__price b {
+  font-weight: 600;
 }
 
 .crt-result__description {
