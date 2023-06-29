@@ -102,10 +102,10 @@ async function fetch_listing() {
   };
 
   if (!props.query) {
-    raw_result = (await getCategoryProducts(
+    raw_result = await getCategoryProducts(
       "e435c9763b0d44fcab67ea1c0fdb3fa0",
       sorting_options
-    )) as ShopwareResult; // TODO: fix types from @shopware-pwa/commons
+    );
   } else {
     raw_result = await searchProducts({
       query: props.query,
