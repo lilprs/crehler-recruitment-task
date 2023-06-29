@@ -18,7 +18,7 @@
           class="form-select w-auto crt-navbar__sorting"
           aria-label="Wybierz sposób sortowania"
           :value="props.sorting"
-          @input="(ev) => emit('update:sorting', (ev.target as HTMLSelectElement).value)"
+          @input="(ev) => emit('update:sorting', (ev.target as HTMLSelectElement).value as Sorting)"
         >
           <option value="price_ascending">Najtańsze</option>
           <option value="price_descending">Najdroższe</option>
@@ -36,11 +36,13 @@
 }
 </style>
 <script setup lang="ts">
+import { Sorting } from "../types";
+
 const props = defineProps<{
-  sorting: string;
+  sorting: Sorting;
 }>();
 
 const emit = defineEmits<{
-  (e: "update:sorting", value: string): void;
+  (e: "update:sorting", value: Sorting): void;
 }>();
 </script>

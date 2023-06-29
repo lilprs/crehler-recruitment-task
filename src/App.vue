@@ -1,19 +1,24 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import Navbar from "./components/Navbar.vue";
 import Results from "./components/Results.vue";
 import SearchField from "./components/SearchField.vue";
+import { Sorting } from "./types";
+
+const sorting = ref<Sorting>("price_ascending");
+const query = ref("");
 </script>
 
 <template>
-  <Navbar sorting="price_ascending" />
+  <Navbar v-model:sorting="sorting" />
   <div class="crt-search">
     <div class="container-fluid">
-      <SearchField value="" />
+      <SearchField v-model:value="query" />
     </div>
   </div>
   <div class="crt-results">
     <div class="container-fluid">
-      <Results query="" />
+      <Results :query="query" :sorting="sorting" />
     </div>
   </div>
 </template>
