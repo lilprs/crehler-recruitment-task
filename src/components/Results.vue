@@ -7,7 +7,11 @@
   />
 </template>
 <script setup lang="ts">
-import { getCategoryProducts, setup } from "@shopware-pwa/shopware-6-client";
+import {
+  getCategoryProducts,
+  searchProducts,
+  setup,
+} from "@shopware-pwa/shopware-6-client";
 import { onMounted, ref, watch } from "vue";
 import Result from "./Result.vue";
 
@@ -33,6 +37,7 @@ setup({
 
 const props = defineProps<{
   query: string;
+  sorting: "price_ascending" | "price_descending";
 }>();
 
 const results = ref<
@@ -43,32 +48,38 @@ const results = ref<
   }[]
 >([]);
 
+type ShopwareResult = {
+  elements: {
+    translated: {
+      name: string;
+      description: string;
+    };
+    calculatedPrice: {
+      totalPrice: number;
+    };
+  }[];
+};
+
 async function fetch_listing() {
-  console.log(props.query);
+  let raw_result: ShopwareResult = {
+    elements: [],
+  };
+
   if (!props.query) {
-    const raw_result = (await getCategoryProducts(
+    raw_result = (await getCategoryProducts(
       "e435c9763b0d44fcab67ea1c0fdb3fa0"
-    )) as {
-      elements: {
-        translated: {
-          name: string;
-          description: string;
-        };
-        calculatedPrice: {
-          totalPrice: number;
-        };
-      }[];
-    }; // TODO: fix types from  @shopware-pwa/commons
-
-    console.log("raw result", raw_result);
-
-    results.value = raw_result.elements.map((element) => ({
-      name: element.translated.name,
-      description: element.translated.description,
-      price: element.calculatedPrice.totalPrice,
-    }));
-    return;
+    )) as ShopwareResult; // TODO: fix types from @shopware-pwa/commons
+  } else {
+    raw_result = await searchProducts({
+      query: props.query,
+    });
   }
+
+  results.value = raw_result.elements.map((element) => ({
+    name: element.translated.name,
+    description: element.translated.description,
+    price: element.calculatedPrice.totalPrice,
+  }));
 }
 
 watch(() => props.query, fetch_listing);
