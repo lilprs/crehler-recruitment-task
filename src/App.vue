@@ -7,37 +7,38 @@ import SearchField from "./components/SearchField.vue";
 <template>
   <Navbar sorting="price_ascending" />
   <div class="crt-search">
-    <SearchField value="" />
+    <div class="container-fluid">
+      <SearchField value="" />
+    </div>
   </div>
   <div class="crt-results">
-    <Results />
+    <div class="container-fluid">
+      <Results query="" />
+    </div>
   </div>
 </template>
 <style>
 .crt-search {
-  padding: 1rem;
   background: white;
+  padding: 4rem 0;
 }
 
-.crt-search > .crt-search-field {
+.crt-search .crt-search-field {
   max-width: 500px;
   margin: 0 auto;
 }
 
 .crt-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
   background: #eee;
-  flex-grow: 1;
-  align-items: flex-start;
+  padding: 4rem 0;
 }
 
-@media (min-width: 700px) {
-  .crt-search,
-  .crt-results {
-    padding: 5rem;
-  }
+.crt-results > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  flex-grow: 1;
+  align-items: flex-start;
+  max-width: 960px;
 }
 </style>
