@@ -20,8 +20,8 @@
           :value="props.sorting"
           @input="(ev) => emit('update:sorting', (ev.target as HTMLSelectElement).value as Sorting)"
         >
-          <option value="price_ascending">Najtańsze</option>
-          <option value="price_descending">Najdroższe</option>
+          <option value="price-asc">Najtańsze</option>
+          <option value="price-desc">Najdroższe</option>
         </select>
       </div>
     </div>

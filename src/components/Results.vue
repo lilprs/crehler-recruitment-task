@@ -42,6 +42,7 @@ import {
 import { debounce } from "lodash-es";
 import { onMounted, ref, watch } from "vue";
 import Result from "./Result.vue";
+import type { Sorting } from "./../types";
 
 const SHOPWARE_ENDPOINT = import.meta.env.VITE_SHOPWARE_ENDPOINT;
 const SHOPWARE_ACCESS_TOKEN = import.meta.env.VITE_SHOPWARE_ACCESS_TOKEN;
@@ -65,7 +66,7 @@ setup({
 
 const props = defineProps<{
   query: string;
-  sorting: "price_ascending" | "price_descending";
+  sorting: Sorting;
 }>();
 
 const loading = ref(true);
@@ -96,13 +97,19 @@ async function fetch_listing() {
     elements: [],
   };
 
+  const sorting_options = {
+    order: props.sorting,
+  };
+
   if (!props.query) {
     raw_result = (await getCategoryProducts(
-      "e435c9763b0d44fcab67ea1c0fdb3fa0"
+      "e435c9763b0d44fcab67ea1c0fdb3fa0",
+      sorting_options
     )) as ShopwareResult; // TODO: fix types from @shopware-pwa/commons
   } else {
     raw_result = await searchProducts({
       query: props.query,
+      ...sorting_options,
     });
   }
 
@@ -116,6 +123,6 @@ async function fetch_listing() {
 
 const fetch_listing_debounced = debounce(fetch_listing, 500);
 
-watch(() => props.query, fetch_listing_debounced);
+watch(() => [props.query, props.sorting], fetch_listing_debounced);
 onMounted(fetch_listing_debounced);
 </script>

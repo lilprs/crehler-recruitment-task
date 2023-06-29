@@ -1,1 +1,1 @@
-export type Sorting = "price_ascending" | "price_descending";
+export type Sorting = "price-asc" | "price-desc";
