@@ -2,6 +2,8 @@
 
 ![Screenshot of the app](screenshot.png)
 
+[Live demo](https://lilprs.github.io/crehler-recruitment-task/)
+
 ## How to run
 
 1. Copy `.env.example`, rename it to `.env` and put real credentials there
