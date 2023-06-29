@@ -33,8 +33,6 @@
 }
 </style>
 <script setup lang="ts">
-import "bootstrap";
-
 const props = defineProps<{
   sorting: string;
 }>();
