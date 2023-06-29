@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar bg-dark navbar-expand-lg" data-bs-theme="dark">
-    <div class="container-fluid">
+    <div class="container-fluid crt-navbar__container">
       <a class="navbar-brand" href="#">Shopware listing</a>
       <button
         class="navbar-toggler"
@@ -15,7 +15,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <select
-          class="form-select w-auto crt-sorting"
+          class="form-select w-auto crt-navbar__sorting"
           aria-label="Wybierz sposób sortowania"
           :value="props.sorting"
           @input="(ev) => emit('update:sorting', (ev.target as HTMLSelectElement).value)"
@@ -28,8 +28,11 @@
   </nav>
 </template>
 <style>
-.crt-sorting {
+.crt-navbar__sorting {
   margin-left: auto;
+}
+.crt-navbar__container {
+  max-width: 960px;
 }
 </style>
 <script setup lang="ts">
