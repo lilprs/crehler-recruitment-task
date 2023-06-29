@@ -1,5 +1,7 @@
 # CREHLER recruitment task
 
+![Screenshot of the app](screenshot.png)
+
 ## How to run
 
 1. Copy `.env.example`, rename it to `.env` and put real credentials there
