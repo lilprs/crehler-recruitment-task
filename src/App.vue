@@ -5,7 +5,7 @@ import Results from "./components/Results.vue";
 import SearchField from "./components/SearchField.vue";
 import { Sorting } from "./types";
 
-const sorting = ref<Sorting>("price_ascending");
+const sorting = ref<Sorting>("price-asc");
 const query = ref("");
 </script>
 
