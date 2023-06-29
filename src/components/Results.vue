@@ -1,17 +1,45 @@
 <template>
-  <Result
-    v-for="result in results"
-    :name="result.name"
-    :description="result.description"
-    :price="result.price"
-  />
+  <div class="crt-results--loading" v-if="loading">
+    <div>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Ładowanie...</span>
+      </div>
+    </div>
+  </div>
+  <div class="crt-results" v-else>
+    <Result
+      v-for="result in results"
+      :name="result.name"
+      :description="result.description"
+      :price="result.price"
+    />
+  </div>
 </template>
+<style>
+.crt-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  flex-grow: 1;
+  align-items: flex-start;
+}
+.crt-results--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+.crt-results--loading > div {
+  transform: scale(3);
+}
+</style>
 <script setup lang="ts">
 import {
   getCategoryProducts,
   searchProducts,
   setup,
 } from "@shopware-pwa/shopware-6-client";
+import { debounce } from "lodash-es";
 import { onMounted, ref, watch } from "vue";
 import Result from "./Result.vue";
 
@@ -40,6 +68,8 @@ const props = defineProps<{
   sorting: "price_ascending" | "price_descending";
 }>();
 
+const loading = ref(true);
+
 const results = ref<
   {
     name: string;
@@ -61,6 +91,7 @@ type ShopwareResult = {
 };
 
 async function fetch_listing() {
+  loading.value = true;
   let raw_result: ShopwareResult = {
     elements: [],
   };
@@ -80,8 +111,11 @@ async function fetch_listing() {
     description: element.translated.description,
     price: element.calculatedPrice.totalPrice,
   }));
+  loading.value = false;
 }
 
-watch(() => props.query, fetch_listing);
-onMounted(fetch_listing);
+const fetch_listing_debounced = debounce(fetch_listing, 500);
+
+watch(() => props.query, fetch_listing_debounced);
+onMounted(fetch_listing_debounced);
 </script>
