@@ -25,7 +25,7 @@ const query = ref("");
 <style>
 .crt-search-container {
   background: white;
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .crt-search-container .crt-search-field {
@@ -35,7 +35,7 @@ const query = ref("");
 
 .crt-results-container {
   background: #eee;
-  padding: 4rem 0;
+  padding: 2rem 0;
   flex-grow: 1;
 }
 

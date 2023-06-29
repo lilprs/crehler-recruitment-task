@@ -3,14 +3,13 @@
     :value="props.value"
     @input="(ev) => emit('update:value', (ev.target as HTMLSelectElement).value)"
     type="text"
-    class="form-control crt-search-field"
+    class="form-control crt-search-field cr-elevated"
     placeholder="Szukaj..."
   />
 </template>
 <style>
 .crt-search-field {
   font-size: 1.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 </style>
 <script setup lang="ts">
