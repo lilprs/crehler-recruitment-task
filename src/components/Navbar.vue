@@ -1,0 +1,45 @@
+<template>
+  <nav class="navbar bg-dark navbar-expand-lg" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Shopware listing</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Przełącz widoczność menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <select
+          class="form-select w-auto crt-sorting"
+          aria-label="Wybierz sposób sortowania"
+          :value="props.sorting"
+          @input="(ev) => emit('update:sorting', (ev.target as HTMLSelectElement).value)"
+        >
+          <option value="price_ascending">Najtańsze</option>
+          <option value="price_descending">Najdroższe</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+</template>
+<style>
+.crt-sorting {
+  margin-left: auto;
+}
+</style>
+<script setup lang="ts">
+import "bootstrap";
+
+const props = defineProps<{
+  sorting: string;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:sorting", value: string): void;
+}>();
+</script>
