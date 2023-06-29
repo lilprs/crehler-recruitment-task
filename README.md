@@ -1,6 +1,10 @@
-# Vue 3 + TypeScript + Vite
+# CREHLER recruitment task
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## How to run
+
+1. Copy `.env.example`, rename it to `.env` and put real credentials there
+2. Install dependencies via `npm install`
+3. Run dev server via `npm run dev`
 
 ## Recommended IDE Setup
 
