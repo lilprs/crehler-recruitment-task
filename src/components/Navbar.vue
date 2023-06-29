@@ -34,6 +34,10 @@
 .crt-navbar__container {
   max-width: 960px;
 }
+
+.navbar-collapse:is(.show, .collapsing) .crt-navbar__sorting {
+  margin-top: 0.5rem;
+}
 </style>
 <script setup lang="ts">
 import { Sorting } from "../types";
