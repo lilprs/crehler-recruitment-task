@@ -1,5 +1,5 @@
 <template>
-  <div class="crt-result cr-elevated">
+  <div class="crt-result crt-elevated">
     <h2 class="crt-result__name">{{ props.name }}</h2>
     <p class="crt-result__description">
       {{

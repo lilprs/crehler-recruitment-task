@@ -3,7 +3,7 @@
     :value="props.value"
     @input="(ev) => emit('update:value', (ev.target as HTMLSelectElement).value)"
     type="text"
-    class="form-control crt-search-field cr-elevated"
+    class="form-control crt-search-field crt-elevated"
     placeholder="Szukaj..."
   />
 </template>
